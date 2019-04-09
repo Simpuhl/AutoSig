@@ -35,6 +35,12 @@ function Update-Signature {
     $strWebsite = $objUser.wWWHomePage
     $strddi = $objUser.otherTelephone
     $strmobile = $objUser.mobile
+    $strFax = $objUser.facsimileTelephoneNumber
+            if($objUser.facsimileTelephoneNumber.length -gt 0)
+            {$strfax2 = $objuser.facsimileTelephoneNumber.Substring(3)
+            $strfax3 = $strfax2.Insert(7,'-')
+            $strfax = " | F: " + $strfax3
+            }
     #check if ddi exists if it does add to signature, otherwise remove block from signature.
     if ($strddi -ne $null){
     $ddi = @"
@@ -102,7 +108,7 @@ function Update-Signature {
       style='font-size:10.0pt;font-family:"Segoe UI",sans-serif;color:#023a98;LINE-HEIGHT:0pt'>T </span></b><span style='font-size:10.0pt;
       font-family:"Segoe UI",sans-serif;
       color:black'>&nbsp;</span><span style='font-size:10.0pt;font-family:"Segoe UI",sans-serif;
-      color:#000000;LINE-HEIGHT:0pt'>$companyphone EXT: $strPhone</span></p>
+      color:#000000;LINE-HEIGHT:0pt'>$companyphone EXT: $strPhone - FAX: strFax</span></p>
       $($ddi)
       $($mobile)
       <p class=MsoNormal><b><span
